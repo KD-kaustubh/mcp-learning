@@ -98,5 +98,19 @@ def search_notes(keyword: str) -> list:
         for row in rows
     ]
 
+@mcp.resource("notes://summary")
+def notes_summary() -> str:
+    """Return a summary of saved notes."""
+
+    conn = sqlite3.connect("notes.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM notes")
+    count = cursor.fetchone()[0]
+
+    conn.close()
+
+    return f"You have {count} saved notes."
+
 if __name__ == "__main__":
     mcp.run()
