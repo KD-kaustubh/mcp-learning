@@ -112,5 +112,15 @@ def notes_summary() -> str:
 
     return f"You have {count} saved notes."
 
+@mcp.prompt()
+def summarize_note(title: str, content: str) -> str:
+    """Create a prompt for summarizing a note."""
+
+    return f"""Summarize the following note in 3 concise bullet points.
+
+Title: {title}
+Content: {content}
+"""
+
 if __name__ == "__main__":
     mcp.run()
